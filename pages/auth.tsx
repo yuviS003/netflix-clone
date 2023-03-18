@@ -7,25 +7,23 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 import Input from "@/components/Input";
-import Image from "next/image";
 
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context);
-//   console.log(session);
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
 
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 
-//   return {
-//     props: {},
-//   };
-// }
+  return {
+    props: {},
+  };
+}
 
 const Auth = () => {
   const router = useRouter();
@@ -51,7 +49,7 @@ const Auth = () => {
         callbackUrl: "/",
       });
 
-      router.push("/profiles");
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +73,7 @@ const Auth = () => {
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
         <nav className="px-12 py-5">
-          <Image src="/images/logo.png" width="100" height="0" alt="Logo" />
+          <img src="/images/logo.png" className="h-12" alt="Logo" />
         </nav>
         <div className="flex justify-center">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
@@ -108,20 +106,34 @@ const Auth = () => {
               />
             </div>
             <button
+              type="button"
               onClick={variant === "login" ? login : register}
               className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
             >
               {variant === "login" ? "Login" : "Sign up"}
             </button>
+            {variant === "login" && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("yuvraj@gmail.com");
+                  setPassword("12345");
+                }}
+                className="bg-red-400 py-3 text-white rounded-md w-full mt-10 hover:bg-red-300 transition"
+              >
+                Get Guest Login Credentials
+              </button>
+            )}
+
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                // onClick={() => signIn("google", { callbackUrl: "/" })}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
               >
                 <FcGoogle size={32} />
               </div>
               <div
-                onClick={() => signIn("github", { callbackUrl: "/" })}
+                // onClick={() => signIn("github", { callbackUrl: "/" })}
                 className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
               >
                 <FaGithub size={32} />
