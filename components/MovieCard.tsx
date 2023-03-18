@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
+import FavoriteButton from "./FavoriteButton";
 
 interface MovieCardProps {
   data: Record<string, any>;
@@ -8,7 +9,7 @@ interface MovieCardProps {
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   return (
-    <div className="group bg-zinc-900 col-span relative h-[12vh]">
+    <div className="group bg-zinc-900 col-span relative h-[20vh]">
       <img
         src={data.thumbnailUrl}
         alt="thumbnail"
@@ -28,6 +29,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             >
               <BsFillPlayFill size={30} />
             </div>
+            <FavoriteButton movieId={data?.id} />
           </div>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
