@@ -48,7 +48,7 @@ const Navbar = () => {
               />
             </div>
             <BsChevronDown className="text-gray-400 hover:text-gray-200  transition" />
-            {/* <AccordionMenu /> */}
+            <AccordionMenu visible/>
           </div>
         </div>
       </div>
