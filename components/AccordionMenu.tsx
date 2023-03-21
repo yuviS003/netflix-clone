@@ -1,3 +1,4 @@
+import useCurrentUser from "@/hooks/useCurrentUser";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
@@ -7,6 +8,7 @@ interface AccordionMenuProps {
 }
 
 const AccordionMenu: React.FC<AccordionMenuProps> = ({ visible }) => {
+  const { data } = useCurrentUser();
   if (!visible) return null;
   return (
     <div className="bg-black w-56 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800 flex">
@@ -20,7 +22,7 @@ const AccordionMenu: React.FC<AccordionMenuProps> = ({ visible }) => {
             className="rounded-md"
           />
           <p className="text-white text-sm group-hover/item:underline capitalize">
-            username
+            {data?.name}
           </p>
         </div>
         <div className="bg-black border-t border-gray-500 h-px py-2">
